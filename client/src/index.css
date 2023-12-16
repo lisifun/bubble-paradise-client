@@ -1,0 +1,319 @@
+/* Body */
+body {
+  font-family: "Caveat Brush", cursive;
+  /* font-family: "Nunito", sans-serif; */
+  /* font-family: "Pacifico", cursive; */
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  background-color: #f65a26;
+  align-items: center;
+  padding: 20px 80px;
+  justify-content: space-between;
+}
+
+.store-logo-name {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.name {
+  font-size: 2.5em;
+}
+
+.nav-keys {
+  display: flex;
+  gap: 24px;
+}
+
+/* Home Page */
+.service-container {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Service Card */
+.service-card {
+  background-color: #f65a26;
+  border-radius: 25px;
+  font-size: 1.5em;
+  gap: 24px;
+  width: 140px;
+  height: 80px;
+  text-align: center;
+  padding-top: 50px;
+}
+
+/* Grooming Page */
+.grooming-page,
+.calendar-page,
+.bording-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+}
+
+.advertisement {
+  font-size: 2em;
+}
+
+.size-container,
+.package-container {
+  margin-bottom: 120px;
+  display: flex;
+  gap: 40px;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1000px;
+  margin: 40px 0px;
+}
+
+button {
+  width: 100px;
+  height: 50px;
+  border-radius: 15px;
+  background-color: #f65a26;
+  border: none;
+  font-size: 1.2em;
+}
+
+/* Size Card */
+.size-card {
+  position: relative;
+  text-align: center;
+  /* color: white; Set the text color */
+  border-radius: 5%;
+  /* padding: 32px; */
+}
+.size-card.selected {
+  border: 2px solid black;
+}
+
+.size-picture {
+  width: 250px;
+  height: 250px;
+  border-radius: 5%;
+}
+
+.size-info {
+  position: absolute;
+  top: 50%; /* Adjust as needed to vertically center the text */
+  left: 50%; /* Adjust as needed to horizontally center the text */
+  transform: translate(-50%, -50%);
+  color: black;
+  padding-top: 180px;
+  font-size: 1.5em;
+}
+
+.additional-info-box {
+  margin-top: 24px;
+  position: absolute;
+  top: 80%; /* Coloca el cuadro debajo del size-card */
+  left: 2%;
+  right: 2%;
+  background-color: #fff; /* Color de fondo */
+  border: 1px solid #ccc; /* Borde del cuadro */
+  border-radius: 4px; /* Esquinas redondeadas */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para resaltar el cuadro */
+  padding: 10px; /* Espaciado interno */
+  z-index: 1; /* Asegura que el cuadro aparezca encima del size-card */
+  display: none; /* Inicialmente oculto */
+}
+
+.size-card:hover .additional-info-box,
+.package-card:hover .additional-info-box {
+  display: block; /* Muestra el cuadro cuando se pasa el mouse sobre size-card */
+}
+
+.additional-info-box p {
+  margin: 0; /* Elimina el margen predeterminado del párrafo */
+  color: #333; /* Color del texto */
+  font-size: 1em; /* Tamaño del texto */
+  line-height: 1.4; /* Altura de línea */
+  text-align: left;
+}
+
+.size-card:hover,
+.package-card:hover {
+  transform: scale(1.05);
+  transition: 0.6s;
+}
+
+/* Package Card */
+.package-card {
+  position: relative;
+  text-align: center;
+  color: white; /* Set the text color */
+  border-radius: 5%;
+  /* padding: 32px; */
+  background-color: white;
+}
+
+.package-card.selected {
+  border: 2px solid black;
+}
+
+.package-picture {
+  width: 250px;
+  height: 250px;
+  border-radius: 5%;
+}
+
+.package-info {
+  position: absolute;
+  top: 50%; /* Adjust as needed to vertically center the text */
+  left: 50%; /* Adjust as needed to horizontally center the text */
+  transform: translate(-50%, -50%);
+  color: black;
+  padding-bottom: 220px;
+  font-size: 1.5em;
+}
+
+/* Boarding Page */
+.boarding-info {
+  margin: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+/* Boarding Card */
+.boarding-card {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.item-picture {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  border-radius: 5%;
+}
+
+/* Calendar Page */
+
+/* Calendar */
+.calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 500px;
+  gap: 32px;
+}
+
+.month {
+  display: flex;
+  justify-content: space-between;
+  width: 450px;
+}
+
+.days {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 450px;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid gray;
+  border-radius: 15px;
+  width: 50px;
+  height: 50px;
+}
+
+.hours {
+  display: flex;
+  gap: 20px;
+}
+
+.hour {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid gray;
+  width: 90px;
+  height: 50px;
+  border-radius: 15px;
+}
+
+/* Form Page */
+input {
+  width: 350px;
+  height: 50px;
+  border-radius: 15px;
+  border: 1px solid gray;
+}
+
+textarea {
+  width: 350px;
+  height: 90px;
+  border-radius: 15px;
+  border: 1px solid gray;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 80px;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo-name {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.footer-logo-name > img {
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.footer-logo-name > p {
+  /* border: 2px solid #f65a26; */
+  /* padding: 4px; */
+  /* background-color: white; */
+  font-size: 2em;
+}
+
+.footer-links {
+  display: flex;
+  gap: 8px;
+}
+
+.footer-links > a {
+  border: 1px solid #f65a26;
+  background-color: #f65a26;
+  border-radius: 50%;
+  color: white;
+  font-size: 40px;
+  padding: 12px;
+  width: 40px;
+  height: 40px;
+}
