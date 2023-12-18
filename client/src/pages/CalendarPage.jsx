@@ -13,13 +13,13 @@ const CalendarPage = () => {
       <div className="nav-buttons">
         <div>
           <Link to="/grooming">
-            <button>Back</button>
+            <button className="back-button">Back</button>
           </Link>
         </div>
 
         <div>
           <Link to="/grooming/calendar/form-page">
-            <button>Next</button>
+            <button className="next-button">Next</button>
           </Link>
         </div>
       </div>

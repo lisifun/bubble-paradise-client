@@ -18,6 +18,7 @@ const PackageCard = ({ packet }) => {
       setIsSelected(true);
     }
   };
+
   return (
     <div
       className={`package-card ${isSelected ? "selected" : ""}`}

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/IMG_5725.jpg";
 
-const navKeys = ["Calendar", "Last Orders", "Gallery"];
+const navKeys = ["Last Orders", "Gallery", "Contact"];
 const Navbar = () => {
   return (
     <div className="navbar">

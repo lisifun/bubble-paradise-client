@@ -2,50 +2,69 @@ import React, { useState } from "react";
 
 // const currentDate = new Date();
 const appointmentHours = [
-  "8:00 AM",
-  "10:00 AM",
-  "12:00 PM",
-  "2:00 PM",
-  "4:00 PM",
+  [
+    "8:00 AM",
+    "8:30 AM",
+    "9:00 AM",
+    "9:30 AM",
+    "10:00 AM",
+    "10:30 AM",
+    "11:00 AM",
+    "11:30 AM",
+  ],
+  [
+    "12:00 PM",
+    "12:30 PM",
+    "1:00 PM",
+    "1:30 PM",
+    "2:00 PM",
+    "2:30 PM",
+    "3:00 PM",
+    "3:30 PM",
+  ],
 ];
 
 const Calendar = () => {
   const currentDate = new Date();
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
   const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
+  const [currentDay, setCurrentDay] = useState(currentDate.getDate());
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedHour, setSelectedHour] = useState(null);
 
-  console.log("trying thissss");
-  console.log("selected date => ", selectedDate);
-  console.log("selected hour => ", selectedHour);
-
-  const newDate = new Date(currentYear, currentMonth);
+  const newDate = new Date(currentYear, currentMonth, currentDay);
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); // Get the total number of days in the month
   const datesArray = [];
-  for (let day = 1; day < daysInMonth + 1; day++) {
+  for (let day = currentDay; day < daysInMonth + 1; day++) {
     let currentDate = new Date(currentYear, currentMonth, day);
     datesArray.push(currentDate);
   }
+
+  console.log(selectedDate);
+  console.log(selectedHour);
 
   return (
     <div className="calendar">
       {/* Month Section  */}
       <div className="month">
         <button
+          className="button-month"
           onClick={() => {
             setCurrentMonth(currentMonth - 1);
+            setCurrentDay(1);
           }}
         >
           <i className="fas fa-chevron-left"></i>
         </button>
-        <p>
+        <strong>
           {newDate.toLocaleString("en-US", { month: "long" })}{" "}
           {newDate.getFullYear()}
-        </p>
+        </strong>
         <button
+          className="button-month"
           onClick={() => {
             setCurrentMonth(currentMonth + 1);
+            setCurrentDay(1);
           }}
         >
           {" "}
@@ -54,41 +73,62 @@ const Calendar = () => {
       </div>
 
       {/* Days Section  */}
-      <div
-        className="weekdays"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          width: "420px",
-        }}
-      >
-        <div>SUN</div>
-        <div>MON</div>
-        <div>TUE</div>
-        <div>WED</div>
-        <div>THU</div>
-        <div>FRI</div>
-        <div>SAT</div>
-      </div>
       <div className="days">
-        {datesArray.map((date) => (
-          <div className="day" onClick={() => setSelectedDate(date)}>
+        {datesArray.map((date, index) => (
+          <div
+            key={index}
+            className="day"
+            // className={`day ${isSelectedDate ? "selected" : ""}`}
+            onClick={() => {
+              setSelectedDate(date);
+            }}
+          >
             {date
               .toLocaleString("en-US", { weekday: "long" })
               .slice(0, 3)
               .toUpperCase()}
-            <div>{date.getDate()}</div>
+            <strong>{date.getDate()}</strong>
           </div>
         ))}
       </div>
 
       {/* Hours Section  */}
       <div className="hours">
-        {appointmentHours.map((hour) => (
-          <div className="hour" onClick={() => setSelectedHour(hour)}>
-            {hour}
+        <div className="morning">
+          <div>Morning</div>
+          <div className="morning-hours">
+            {appointmentHours[0].map((hour, index) => (
+              <strong
+                key={index}
+                className="hour"
+                // className={`hour ${isSelectedHour ? "selected" : ""}`}
+                onClick={() => {
+                  setSelectedHour(hour);
+                }}
+              >
+                {hour}
+              </strong>
+            ))}
           </div>
-        ))}
+        </div>
+
+        <div className="afternoon">
+          <div>Afternoon</div>
+          <div className="afternoon-hours">
+            {appointmentHours[1].map((hour, index) => (
+              <strong
+                key={index}
+                className="hour"
+                // className={`hour ${isSelectedHour ? "selected" : ""}`}
+                onClick={() => {
+                  setSelectedHour(hour);
+                }}
+              >
+                {hour}
+              </strong>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

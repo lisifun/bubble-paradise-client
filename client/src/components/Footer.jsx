@@ -24,14 +24,14 @@ const Footer = () => {
       <div className="footer-right">
         <h2>About</h2>
         <p>
-          <i className="fas fa-map-marker-alt"></i> 656 E Farmer Leo Ct, Sandy,
-          UT 84070
+          <i className="fas fa-map-marker-alt"></i> 390 W 700 S, Salt Lake City,
+          UT 84104
         </p>
         <p>
-          <i className="fas fa-phone"></i> (425)546-6197
+          <i className="fas fa-phone"></i> (801)448-2940
         </p>
         <p>
-          <i className="fas fa-clock"></i> Mon - Sun: 8AM - 6PM
+          <i className="fas fa-clock"></i> Mon - Sun: 8AM - 4PM
         </p>
       </div>
     </div>
