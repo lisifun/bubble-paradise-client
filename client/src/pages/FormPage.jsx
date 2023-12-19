@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { OrderContext } from "../context/order.context";
 import { Link } from "react-router-dom";
 
 const FormPage = () => {
   const [newApoitment, setNewApoitment] = useState({
-    id: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -11,20 +11,23 @@ const FormPage = () => {
     comment: "",
   });
 
+  const { newOrder, addContact } = useContext(OrderContext);
+
   const handleTextInput = (e) => {
     setNewApoitment((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
-    // Add new apoitment to the Calendar
-  };
+  //   // Add new apoitment to the Calendar
+  // };
 
   return (
     <div className="form-page">
       <h1>Your Details!</h1>
-      <form className="form" onSubmit={handleSubmit}>
+
+      <form className="form">
         <div className="email-input">
           <label>
             Email<sup style={{ color: "red" }}>*</sup>
@@ -34,7 +37,6 @@ const FormPage = () => {
             name="email"
             value={newApoitment.email}
             onChange={handleTextInput}
-            // placeholder="Email"
             required
           ></input>
         </div>
@@ -48,7 +50,6 @@ const FormPage = () => {
             name="firstName"
             value={newApoitment.firstName}
             onChange={handleTextInput}
-            // placeholder="First Name"
             required
           ></input>
         </div>
@@ -62,7 +63,6 @@ const FormPage = () => {
             name="lastName"
             value={newApoitment.lastName}
             onChange={handleTextInput}
-            // placeholder="Last Name"
             required
           ></input>
         </div>
@@ -76,7 +76,6 @@ const FormPage = () => {
             name="phone"
             value={newApoitment.phone}
             onChange={handleTextInput}
-            // placeholder="Phone Number"
             required
           ></input>
         </div>
@@ -90,7 +89,6 @@ const FormPage = () => {
             name="comment"
             value={newApoitment.comment}
             onChange={handleTextInput}
-            // placeholder="Please provide any specific instructions or preferences for your pet's grooming"
           />
         </div>
       </form>
@@ -103,11 +101,22 @@ const FormPage = () => {
         </div>
 
         <div>
-          <Link to="/grooming/calendar/form-page/confirmation-page">
-            <button className="next-button" type="submit">
-              Submit
-            </button>
-          </Link>
+          {newApoitment.firstName &&
+            newApoitment.lastName &&
+            newApoitment.phone &&
+            newApoitment.email && (
+              <Link to="/grooming/calendar/form-page/confirmation-page">
+                <button
+                  className="next-button"
+                  type="submit"
+                  onClick={() => {
+                    addContact(newApoitment);
+                  }}
+                >
+                  Submit
+                </button>
+              </Link>
+            )}
         </div>
       </div>
     </div>

@@ -1,27 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { OrderContext } from "../context/order.context";
 
-// const currentDate = new Date();
 const appointmentHours = [
-  [
-    "8:00 AM",
-    "8:30 AM",
-    "9:00 AM",
-    "9:30 AM",
-    "10:00 AM",
-    "10:30 AM",
-    "11:00 AM",
-    "11:30 AM",
-  ],
-  [
-    "12:00 PM",
-    "12:30 PM",
-    "1:00 PM",
-    "1:30 PM",
-    "2:00 PM",
-    "2:30 PM",
-    "3:00 PM",
-    "3:30 PM",
-  ],
+  ["8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM"],
+  ["12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM"],
 ];
 
 const Calendar = () => {
@@ -31,6 +13,8 @@ const Calendar = () => {
   const [currentDay, setCurrentDay] = useState(currentDate.getDate());
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedHour, setSelectedHour] = useState(null);
+  const [isSelectedDate, setIsSelectedDate] = useState(false);
+  const [isSelectedHour, setIsSelectedHour] = useState(false);
 
   const newDate = new Date(currentYear, currentMonth, currentDay);
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); // Get the total number of days in the month
@@ -40,8 +24,19 @@ const Calendar = () => {
     datesArray.push(currentDate);
   }
 
-  console.log(selectedDate);
-  console.log(selectedHour);
+  const { addDate, addTime } = useContext(OrderContext);
+
+  const handleClickDate = (date) => {
+    setSelectedDate(date);
+    addDate(date);
+    setIsSelectedDate(true);
+  };
+
+  const handleClickHour = (hour) => {
+    setSelectedHour(hour);
+    addTime(hour);
+    setIsSelectedHour(true);
+  };
 
   return (
     <div className="calendar">
@@ -77,10 +72,9 @@ const Calendar = () => {
         {datesArray.map((date, index) => (
           <div
             key={index}
-            className="day"
-            // className={`day ${isSelectedDate ? "selected" : ""}`}
+            className={`day ${isSelectedDate ? "selected" : ""}`}
             onClick={() => {
-              setSelectedDate(date);
+              handleClickDate(date);
             }}
           >
             {date
@@ -100,10 +94,9 @@ const Calendar = () => {
             {appointmentHours[0].map((hour, index) => (
               <strong
                 key={index}
-                className="hour"
-                // className={`hour ${isSelectedHour ? "selected" : ""}`}
+                className={`hour ${isSelectedHour ? "selected" : ""}`}
                 onClick={() => {
-                  setSelectedHour(hour);
+                  handleClickHour(hour);
                 }}
               >
                 {hour}
@@ -118,10 +111,9 @@ const Calendar = () => {
             {appointmentHours[1].map((hour, index) => (
               <strong
                 key={index}
-                className="hour"
-                // className={`hour ${isSelectedHour ? "selected" : ""}`}
+                className={`hour ${isSelectedHour ? "selected" : ""}`}
                 onClick={() => {
-                  setSelectedHour(hour);
+                  handleClickHour(hour);
                 }}
               >
                 {hour}

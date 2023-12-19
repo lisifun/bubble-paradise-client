@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { OrderContext } from "../context/order.context";
 import SizeCard from "../components/SizeCard";
 import PackageCard from "../components/PackageCard";
 
@@ -59,29 +60,33 @@ const packets = [
     name: "Bath",
     image: bath,
     price: 20,
+    duration: 60,
     details: `Regular baths help keep a dog's coat clean and free of dirt, debris, and odors. The frequency of baths depends on the dog's breed, coat type, and activities.`,
   },
   {
     id: 1,
-    name: "Hair",
+    name: "Haircut",
     image: hair,
     price: 20,
+    duration: 60,
     details:
       "Some dog breeds require regular haircuts to maintain a specific coat length. Professional groomers or experienced dog owners may perform these haircuts.",
   },
   {
     id: 2,
-    name: "Nail",
+    name: "Nail Trimming",
     image: nail,
     price: 15,
+    duration: 20,
     details:
       "Keeping a dog's nails trimmed is essential to prevent discomfort and potential injuries. Long nails can affect a dog's gait and lead to orthopedic issues.",
   },
   {
     id: 3,
-    name: "Additional",
+    name: "Additional Services",
     image: other,
     price: 40,
+    duration: 30,
     details: `Additional services includes Teeth Cleaning, 
     Ear Cleaning, Anal Gland Expression and 
     Checking for Parasites. `,
@@ -89,6 +94,8 @@ const packets = [
 ];
 
 const GroomingPage = () => {
+  const { newOrder } = useContext(OrderContext);
+
   return (
     <div className="grooming-page">
       <div>
@@ -116,9 +123,11 @@ const GroomingPage = () => {
         </div>
 
         <div>
-          <Link to="/grooming/calendar">
-            <button className="next-button">Next</button>
-          </Link>
+          {newOrder.size && newOrder.packet.length !== 0 && (
+            <Link to="/grooming/calendar">
+              <button className="next-button">Next</button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

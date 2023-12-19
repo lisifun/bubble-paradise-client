@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { OrderContext } from "../context/order.context";
 
 const SizeCard = ({ dog }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
   const [isSelected, setIsSelected] = useState(false);
-
   const { name, image, size, details } = dog;
 
-  console.log(selectedSize);
+  const { addSize } = useContext(OrderContext);
+
   const handleClick = () => {
-    if (selectedSize === name) {
+    if (selectedSize && selectedSize.name === name) {
       setSelectedSize(null);
       setIsSelected(false);
     } else {
-      setSelectedSize(name);
+      setSelectedSize(dog);
+      addSize(dog);
       setIsSelected(true);
+
+      const allSizeCards = document.querySelectorAll(".size-card");
+      allSizeCards.forEach((card) => {
+        card.classList.remove("selected");
+      });
     }
   };
 
@@ -22,7 +29,7 @@ const SizeCard = ({ dog }) => {
     <div
       className={`size-card ${isSelected ? "selected" : ""}`}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeav={() => setIsHovered(false)}
+      onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
     >
       <img className="size-picture" src={image} alt={`${name} dog picture`} />

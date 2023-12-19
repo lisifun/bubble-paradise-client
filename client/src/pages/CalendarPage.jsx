@@ -1,10 +1,10 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { OrderContext } from "../context/order.context";
 import { Link } from "react-router-dom";
 import Calendar from "../components/Calendar";
 
 const CalendarPage = () => {
-  let currentDate = new Date();
+  const { newOrder } = useContext(OrderContext);
 
   return (
     <div className="calendar-page">
@@ -18,9 +18,11 @@ const CalendarPage = () => {
         </div>
 
         <div>
-          <Link to="/grooming/calendar/form-page">
-            <button className="next-button">Next</button>
-          </Link>
+          {newOrder.date && newOrder.time && (
+            <Link to="/grooming/calendar/form-page">
+              <button className="next-button">Next</button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

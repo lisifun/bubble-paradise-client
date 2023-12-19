@@ -1,46 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { OrderContext } from "../context/order.context";
+import axios from "axios";
+import { API_URL } from "../services/API_URL";
+import { useNavigate } from "react-router-dom/dist";
 
 const EditPage = () => {
-  const [editApoitment, setEditApoitment] = useState({
-    id: "",
-    firstName: "Lisandra",
-    lastName: "Fundora",
-    email: "lisandrafj99@gmail.com",
-    phone: "4255466197",
-    comment: "this is the first bath of my dog",
-    service: ["Bath"],
-    servicePrice: [20],
-    size: "Medium",
-    sizePrice: "40",
-  });
+  const { allOrders, setAllOrders, updatedOrder } = useContext(OrderContext);
+  const [editedOrder, setEditedOrder] = useState(updatedOrder);
+
+  const navigate = useNavigate();
 
   const handleTextInput = (e) => {
-    setNewApoitment((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setEditedOrder((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
-    // Add new apoitment to the Calendar
+    const orderId = editedOrder.id;
+
+    axios
+      .put(`${API_URL}/orders/${orderId}`, editedOrder)
+      .then((response) => {
+        const newOrders = allOrders.map((order) =>
+          order.id === orderId ? response.data : order
+        );
+        setAllOrders(newOrders);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <div className="edit-page">
       <form
         className="form"
-        onSubmit={handleSubmit}
+        // onSubmit={handleSubmit}
         style={{
           width: "800px",
         }}
       >
-        <div
-          className="full-name-input"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
+        <div className="full-name-input">
           <div className="name-input">
             <label>
               First Name<sup style={{ color: "red" }}>*</sup>
@@ -48,9 +50,8 @@ const EditPage = () => {
             <input
               type="text"
               name="firstName"
-              value={editApoitment.firstName}
+              value={editedOrder.firstName}
               onChange={handleTextInput}
-              // placeholder="First Name"
               required
             ></input>
           </div>
@@ -61,21 +62,14 @@ const EditPage = () => {
             <input
               type="text"
               name="lastName"
-              value={editApoitment.lastName}
+              value={editedOrder.lastName}
               onChange={handleTextInput}
-              // placeholder="Last Name"
               required
             ></input>
           </div>
         </div>
 
-        <div
-          className="contact-input"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
+        <div className="contact-input">
           <div className="email-input">
             <label>
               Email<sup style={{ color: "red" }}>*</sup>
@@ -83,9 +77,8 @@ const EditPage = () => {
             <input
               type="text"
               name="email"
-              value={editApoitment.email}
+              value={editedOrder.email}
               onChange={handleTextInput}
-              // placeholder="Email"
               required
             ></input>
           </div>
@@ -97,9 +90,8 @@ const EditPage = () => {
             <input
               type="text"
               name="phone"
-              value={editApoitment.phone}
+              value={editedOrder.phone}
               onChange={handleTextInput}
-              // placeholder="Phone Number"
               required
             ></input>
           </div>
@@ -112,76 +104,23 @@ const EditPage = () => {
           </label>
           <textarea
             name="comment"
-            value={editApoitment.comment}
+            value={editedOrder.comment}
             onChange={handleTextInput}
-            // placeholder="Please provide any specific instructions or preferences for your pet's grooming"
           />
-        </div>
-
-        <div
-          className="service-size-input"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <div
-            className="select-size"
-            style={{
-              display: "flex",
-              gap: "12px",
-              alignItems: "center",
-            }}
-          >
-            <label>Choose the correct size: </label>
-            <select>
-              <option value="small">Small</option>
-              <option value="medium">Medium</option>
-              <option value="large">Large</option>
-              <option value="giant">Giant</option>
-            </select>
-            <input
-              type="submit"
-              style={{
-                border: "none",
-                backgroundColor: "#ff846c",
-                width: "100px",
-                height: "40px",
-              }}
-            ></input>
-          </div>
-          <div
-            className="select-package"
-            style={{
-              display: "flex",
-              gap: "12px",
-              alignItems: "center",
-            }}
-          >
-            <label>Choose a package: </label>
-            <select>
-              <option value="bath">Bath</option>
-              <option value="hair">Hair</option>
-              <option value="nail">Nail</option>
-              <option value="additional">Additional</option>
-            </select>
-            <input
-              type="submit"
-              style={{
-                border: "none",
-                backgroundColor: "#ff846c",
-                width: "100px",
-                height: "40px",
-              }}
-            ></input>
-          </div>
         </div>
       </form>
 
       <div className="nav-buttons">
         <div>
           <Link to="/last-orders">
-            <button className="next-button" type="submit">
+            <button
+              className="next-button"
+              type="submit"
+              onClick={() => {
+                handleSubmit();
+                navigate(-1);
+              }}
+            >
               Update
             </button>
           </Link>

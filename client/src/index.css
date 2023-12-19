@@ -176,26 +176,6 @@ body {
   font-size: 1.4em;
 }
 
-/* Boarding Page */
-.boarding-info {
-  margin: 80px;
-  display: flex;
-  justify-content: space-between;
-}
-/* Boarding Card */
-.boarding-card {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-}
-
-.item-picture {
-  width: 100px;
-  height: 100px;
-  border: 1px solid black;
-  border-radius: 5%;
-}
-
 /* Calendar Page */
 
 /* Calendar */
@@ -224,10 +204,10 @@ body {
 
 .days {
   display: flex;
-  gap: 24px;
+  gap: 20px;
   overflow-x: scroll;
   width: 450px;
-  height: 70px;
+  height: 90px;
   white-space: nowrap;
 }
 
@@ -235,6 +215,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 8px 0px;
   align-items: center;
   border: 1px solid gray;
   border-radius: 15px;
@@ -245,7 +226,6 @@ body {
 
 .day.selected {
   background-color: #ff846c;
-  color: #d3fbd8;
 }
 
 .hours {
@@ -264,7 +244,7 @@ body {
 .morning-hours,
 .afternoon-hours {
   display: flex;
-  gap: 8px;
+  gap: 20px;
   flex-wrap: wrap;
 }
 
@@ -273,7 +253,7 @@ body {
   justify-content: center;
   align-items: center;
   border: 1px solid gray;
-  width: 90px;
+  width: 100px;
   height: 50px;
   border-radius: 15px;
 }
@@ -287,10 +267,10 @@ body {
 /* Order */
 
 .order {
-  width: 450px;
+  width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  /* gap: 40px; */
   padding: 12px;
   border: 1px solid black;
   border-radius: 15px;
@@ -316,6 +296,14 @@ body {
   border-radius: 15px;
 }
 
+/* Edit Page */
+.full-name-input,
+.contact-input,
+.service-size-input {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Form Page */
 .form {
   display: flex;
@@ -332,6 +320,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  padding: 4px;
 }
 
 input {
@@ -339,6 +328,7 @@ input {
   height: 50px;
   border-radius: 15px;
   border: 1px solid gray;
+  padding: 0px 0px 0px 16px;
 }
 
 textarea {
@@ -346,6 +336,7 @@ textarea {
   height: 90px;
   border-radius: 15px;
   border: 1px solid gray;
+  padding: 8px 8px;
 }
 
 /* Confirmation Page */

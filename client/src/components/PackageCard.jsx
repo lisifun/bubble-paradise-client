@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { OrderContext } from "../context/order.context";
 
 const PackageCard = ({ packet }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -6,15 +7,16 @@ const PackageCard = ({ packet }) => {
   const [isSelected, setIsSelected] = useState(false);
   const { name, image, details } = packet;
 
-  console.log(selectedPacket);
+  const { addPacket, removePacket } = useContext(OrderContext);
+
   const handleClick = () => {
-    if (selectedPacket === name) {
-      // Clicked on the already selected package, deselect it
+    if (selectedPacket && selectedPacket.name === name) {
       setSelectedPacket(null);
+      removePacket(packet);
       setIsSelected(false);
     } else {
-      // Clicked on a different package, select it
-      setSelectedPacket(name);
+      setSelectedPacket(packet);
+      addPacket(packet);
       setIsSelected(true);
     }
   };
