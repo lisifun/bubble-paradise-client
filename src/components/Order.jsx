@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import dog from "../assets/IMG_5728.jpg";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -18,6 +18,8 @@ const Order = ({ order }) => {
     sizePrice,
   } = order;
 
+  const [showOptions, setShowOptions] = useState(false);
+
   const { allOrders, setAllOrders, extractingOrder } = useContext(OrderContext);
 
   const deleteOrder = (orderId) => {
@@ -32,47 +34,89 @@ const Order = ({ order }) => {
       });
   };
 
+  const handleClick = () => {
+    console.log("you clicked!");
+    setShowOptions(!showOptions);
+  };
+
   return (
     <div className="order">
-      <div className="order-info">
-        <strong>
-          {firstName} {lastName}
-        </strong>
-        <div>
-          {DateTime.fromISO(date).toLocaleString(
-            DateTime.DATE_MED_WITH_WEEKDAY
-          )}
-          {" at "}
-          {time}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          border: "1px solid yellow",
+        }}
+      >
+        <div className="order-info" style={{ border: "1px solid blue" }}>
+          <strong>
+            {firstName} {lastName}
+          </strong>
+          <div>
+            {DateTime.fromISO(date).toLocaleString(
+              DateTime.DATE_MED_WITH_WEEKDAY
+            )}
+            {" at "}
+            {time}
+          </div>
+          <div>Services: {packet.join(", ")}</div>
+          <div>
+            Total: $
+            {packetPrice.reduce((total, price) => {
+              return total + price;
+            }, 0) + sizePrice}
+          </div>
         </div>
-        <div>Services: {packet.join(", ")}</div>
-        <div>
-          Total: $
-          {packetPrice.reduce((total, price) => {
-            return total + price;
-          }, 0) + sizePrice}
-        </div>
+
+        <button
+          className="order-buttons"
+          onClick={() => handleClick()}
+          style={{ border: "1px solid pink" }}
+        >
+          <i className="fas fa-ellipsis-v" style={{ color: "white" }}></i>
+        </button>
+
+        {showOptions && (
+          <div className="elipsis-options">
+            <Link to="/last-orders/edit-page">
+              <button
+                // className="order-buttons"
+                style={{ border: "none", backgroundColor: "transparent" }}
+                onClick={() => {
+                  extractingOrder(id);
+                }}
+              >
+                <strong>Edit</strong>
+              </button>
+            </Link>
+            <hr
+              style={{ width: "60px", height: "1px", backgroundColor: "black" }}
+            ></hr>
+            <button
+              style={{ border: "none", backgroundColor: "transparent" }}
+              // className="order-buttons"
+              onClick={() => {
+                deleteOrder(id);
+              }}
+            >
+              <strong>Delete</strong>
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="order-options">
-        <Link to="/last-orders/edit-page">
+        <Link to="/last-orders/order-details">
           <button
             className="order-buttons"
-            onClick={() => {
-              extractingOrder(id);
-            }}
+            onClick={() => extractingOrder(id)}
+            style={{ color: "white" }}
           >
-            <i className="fas fa-edit"></i>
+            View
           </button>
         </Link>
-        <button
-          className="order-buttons"
-          onClick={() => {
-            deleteOrder(id);
-          }}
-        >
-          <i className="fas fa-trash"></i>
-        </button>
+
         <img src={dog} style={{ width: "150px" }} />
       </div>
     </div>

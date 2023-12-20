@@ -10,20 +10,20 @@ const CalendarPage = () => {
     <div className="calendar-page">
       <h1>Please, select a Date and Time</h1>
       <Calendar />
-      <div className="nav-buttons">
-        <div>
-          <Link to="/grooming">
-            <button className="back-button">Back</button>
-          </Link>
-        </div>
 
-        <div>
-          {newOrder.date && newOrder.time && (
-            <Link to="/grooming/calendar/form-page">
-              <button className="next-button">Next</button>
-            </Link>
-          )}
-        </div>
+      <div>
+        {newOrder.date && newOrder.time ? (
+          <Link to="/grooming/calendar/form-page">
+            <button className="continue-button">Continue</button>
+          </Link>
+        ) : (
+          <button
+            className="continue-button"
+            style={{ background: "#ffebe6" }}
+          >
+            Continue
+          </button>
+        )}
       </div>
     </div>
   );

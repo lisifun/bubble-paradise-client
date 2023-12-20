@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="store-logo-name">
-        <Link to="/">
+        <Link to="/" style={{ color: "white" }}>
           <img className="logo" src={logo} />
         </Link>
         <div className="name">Bubble Paradise</div>
@@ -16,7 +16,7 @@ const Navbar = () => {
           <Link
             style={{
               textDecoration: "none",
-              color: "black",
+              color: "white",
               fontSize: "1.5em",
             }}
             to={navKey.toLowerCase().replace(" ", "-")}

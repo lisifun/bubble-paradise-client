@@ -1,7 +1,10 @@
 /* Body */
 body {
-  /* font-family: "Inter", sans-serif; */
   font-family: "Rubik", sans-serif;
+}
+
+sup {
+  color: #ff846c;
 }
 
 /* Navbar */
@@ -11,6 +14,7 @@ body {
   align-items: center;
   padding: 20px 80px;
   justify-content: space-between;
+  color: white;
 }
 
 .store-logo-name {
@@ -39,7 +43,7 @@ body {
   background-image: url("./assets/background-img-tobby.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 1100px;
+  height: 99vh;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -47,14 +51,15 @@ body {
 
 .home-info {
   color: white;
+  width: 40vw;
   width: 632px;
-  margin: 340px 120px 40px 0px;
+  margin: 240px 200px 40px 0px;
 }
 
 .service-container {
   display: flex;
   gap: 24px;
-  margin-right: 120px;
+  margin-right: 200px;
 }
 
 .service-card {
@@ -79,33 +84,38 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 80px;
+  margin-top: 40px;
+  gap: 16px;
 }
 
-.size-container,
+.size-container {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 100px;
+}
+
 .package-container {
   display: flex;
   gap: 40px;
-  margin-bottom: 190px;
+  margin-bottom: 100px;
 }
 
-.nav-buttons {
-  display: flex;
-  gap: 800px;
-  margin-bottom: 80px;
-}
-
-.back-button,
-.next-button {
-  width: 100px;
+.continue-button,
+.submit-button,
+.book-now-button,
+.update-button {
+  width: 274px;
   height: 50px;
   border-radius: 15px;
   background-color: #ff846c;
   border: none;
   font-size: 1.2em;
+  margin-bottom: 40px;
+  color: white;
+  font-weight: bold;
 }
 
-/* Size Card */
+/* Size Card && Package Card */
 .size-card,
 .package-card {
   position: relative;
@@ -132,6 +142,19 @@ body {
   transform: translate(-50%, -50%);
   padding-top: 180px;
   font-size: 1.4em;
+  color: white;
+}
+
+.package-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  padding-bottom: 210px;
+  font-size: 1.4em;
+
+  width: 200px;
 }
 
 .additional-info-box {
@@ -165,19 +188,7 @@ body {
   transition: 0.6s;
 }
 
-/* Package Card */
-.package-info {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: black;
-  padding-bottom: 220px;
-  font-size: 1.4em;
-}
-
 /* Calendar Page */
-
 /* Calendar */
 .calendar {
   display: flex;
@@ -185,21 +196,23 @@ body {
   align-items: center;
   width: 500px;
   gap: 32px;
-  margin-bottom: 190px;
+  margin-bottom: 100px;
 }
 
 .month {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   width: 450px;
   align-items: center;
+  justify-content: center;
+  gap: 24px;
 }
 
 .button-month {
-  background-color: #ff846c;
   border: none;
   width: 40px;
   height: 40px;
+  background-color: transparent;
 }
 
 .days {
@@ -217,15 +230,22 @@ body {
   justify-content: space-between;
   padding: 8px 0px;
   align-items: center;
-  border: 1px solid gray;
   border-radius: 15px;
   width: 50px;
   height: 50px;
   flex: 0 0 auto;
+  border: none;
+  background-color: #ffebe6;
+}
+
+.weekday {
+  font-size: 0.6em;
 }
 
 .day.selected {
   background-color: #ff846c;
+  color: white;
+  border: none;
 }
 
 .hours {
@@ -252,64 +272,25 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid gray;
+  border: none;
   width: 100px;
   height: 50px;
   border-radius: 15px;
+  background-color: #ffebe6;
 }
 
 .hour.selected {
   background-color: #ff846c;
-}
-
-/* Last Orders */
-
-/* Order */
-
-.order {
-  width: 400px;
-  display: flex;
-  flex-direction: column;
-  /* gap: 40px; */
-  padding: 12px;
-  border: 1px solid black;
-  border-radius: 15px;
-}
-
-.order-info {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.order-options {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.order-buttons {
-  background-color: #ff846c;
+  color: white;
   border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 15px;
-}
-
-/* Edit Page */
-.full-name-input,
-.contact-input,
-.service-size-input {
-  display: flex;
-  justify-content: space-between;
 }
 
 /* Form Page */
-.form {
+.contact-form {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  margin-bottom: 190px;
+  margin-bottom: 100px;
 }
 
 .email-input,
@@ -343,8 +324,12 @@ textarea {
 .confirmation-info {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  margin-bottom: 190px;
+  gap: 12px;
+  width: 20vw;
+  background-color: #ffebe6;
+  border-radius: 15px;
+  padding: 24px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .date-time,
@@ -357,15 +342,95 @@ textarea {
   border: 1px solid gray;
   border-radius: 15px;
   padding: 12px;
+  gap: 8px;
 }
 
-.book-button {
-  height: 50px;
+.date-time-title,
+.service-size-title,
+.details-title,
+.summary-title {
+  padding-bottom: 16px;
+}
+
+.client-name-info,
+.client-phone-info,
+.client-email-info,
+.client-size-info,
+.client-service-info {
+  display: flex;
+  gap: 4px;
+}
+
+.service-info,
+.dog-size-info,
+.total-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Last Orders */
+.last-orders-page {
+  margin-bottom: 40px;
+}
+
+/* Order */
+.order {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background-color: #ffebe6;
   border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.elipsis-options {
+  align-items: center;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 5vw;
+  gap: 12px;
+  background-color: #ffebe6;
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.order-buttons {
   background-color: #ff846c;
   border: none;
-  font-size: 1.2em;
-  text-align: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+}
+
+/* Edit Page */
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  margin-bottom: 100px;
+  gap: 24px;
+}
+
+.full-name-input,
+.contact-input,
+.service-size-input {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Footer */
@@ -374,6 +439,7 @@ textarea {
   background-color: #ff846c;
   justify-content: space-between;
   padding: 20px 120px;
+  color: white;
 }
 
 .footer-left {

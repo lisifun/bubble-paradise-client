@@ -16,8 +16,6 @@ const EditPage = () => {
   };
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
-
     const orderId = editedOrder.id;
 
     axios
@@ -35,17 +33,11 @@ const EditPage = () => {
 
   return (
     <div className="edit-page">
-      <form
-        className="form"
-        // onSubmit={handleSubmit}
-        style={{
-          width: "800px",
-        }}
-      >
+      <div className="edit-form">
         <div className="full-name-input">
           <div className="name-input">
             <label>
-              First Name<sup style={{ color: "red" }}>*</sup>
+              First Name<sup>*</sup>
             </label>
             <input
               type="text"
@@ -57,7 +49,7 @@ const EditPage = () => {
           </div>
           <div className="lastname-input">
             <label>
-              Lastname<sup style={{ color: "red" }}>*</sup>
+              Lastname<sup>*</sup>
             </label>
             <input
               type="text"
@@ -72,7 +64,7 @@ const EditPage = () => {
         <div className="contact-input">
           <div className="email-input">
             <label>
-              Email<sup style={{ color: "red" }}>*</sup>
+              Email<sup>*</sup>
             </label>
             <input
               type="text"
@@ -85,7 +77,7 @@ const EditPage = () => {
 
           <div className="number-input">
             <label>
-              Phone Number<sup style={{ color: "red" }}>*</sup>
+              Phone Number<sup>*</sup>
             </label>
             <input
               type="text"
@@ -108,23 +100,21 @@ const EditPage = () => {
             onChange={handleTextInput}
           />
         </div>
-      </form>
+      </div>
 
-      <div className="nav-buttons">
-        <div>
-          <Link to="/last-orders">
-            <button
-              className="next-button"
-              type="submit"
-              onClick={() => {
-                handleSubmit();
-                navigate(-1);
-              }}
-            >
-              Update
-            </button>
-          </Link>
-        </div>
+      <div>
+        <Link to="/last-orders">
+          <button
+            className="update-button"
+            type="submit"
+            onClick={() => {
+              handleSubmit();
+              navigate(-1);
+            }}
+          >
+            Update
+          </button>
+        </Link>
       </div>
     </div>
   );

@@ -17,20 +17,14 @@ const FormPage = () => {
     setNewApoitment((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   // Add new apoitment to the Calendar
-  // };
-
   return (
     <div className="form-page">
       <h1>Your Details!</h1>
 
-      <form className="form">
+      <form className="contact-form">
         <div className="email-input">
           <label>
-            Email<sup style={{ color: "red" }}>*</sup>
+            Email<sup>*</sup>
           </label>
           <input
             type="text"
@@ -43,7 +37,7 @@ const FormPage = () => {
 
         <div className="name-input">
           <label>
-            First Name<sup style={{ color: "red" }}>*</sup>
+            First Name<sup>*</sup>
           </label>
           <input
             type="text"
@@ -56,7 +50,7 @@ const FormPage = () => {
 
         <div className="lastname-input">
           <label>
-            Lastname<sup style={{ color: "red" }}>*</sup>
+            Lastname<sup>*</sup>
           </label>
           <input
             type="text"
@@ -69,7 +63,7 @@ const FormPage = () => {
 
         <div className="number-input">
           <label>
-            Phone Number<sup style={{ color: "red" }}>*</sup>
+            Phone Number<sup>*</sup>
           </label>
           <input
             type="text"
@@ -93,31 +87,27 @@ const FormPage = () => {
         </div>
       </form>
 
-      <div className="nav-buttons">
-        <div>
-          <Link to="/grooming/calendar">
-            <button className="back-button">Back</button>
+      <div>
+        {newApoitment.firstName &&
+        newApoitment.lastName &&
+        newApoitment.phone &&
+        newApoitment.email ? (
+          <Link to="/grooming/calendar/form-page/confirmation-page">
+            <button
+              className="submit-button"
+              type="submit"
+              onClick={() => {
+                addContact(newApoitment);
+              }}
+            >
+              Submit
+            </button>
           </Link>
-        </div>
-
-        <div>
-          {newApoitment.firstName &&
-            newApoitment.lastName &&
-            newApoitment.phone &&
-            newApoitment.email && (
-              <Link to="/grooming/calendar/form-page/confirmation-page">
-                <button
-                  className="next-button"
-                  type="submit"
-                  onClick={() => {
-                    addContact(newApoitment);
-                  }}
-                >
-                  Submit
-                </button>
-              </Link>
-            )}
-        </div>
+        ) : (
+          <button className="submit-button" style={{ background: "#ffebe6" }}>
+            Submit
+          </button>
+        )}
       </div>
     </div>
   );

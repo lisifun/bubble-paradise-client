@@ -13,29 +13,56 @@ const Calendar = () => {
   const [currentDay, setCurrentDay] = useState(currentDate.getDate());
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedHour, setSelectedHour] = useState(null);
-  const [isSelectedDate, setIsSelectedDate] = useState(false);
-  const [isSelectedHour, setIsSelectedHour] = useState(false);
+  const [datesReview, setDatesReview] = useState([]);
+  // const [hourReview, setHourReview] = useState([]);
 
   const newDate = new Date(currentYear, currentMonth, currentDay);
-  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); // Get the total number of days in the month
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const datesArray = [];
   for (let day = currentDay; day < daysInMonth + 1; day++) {
     let currentDate = new Date(currentYear, currentMonth, day);
     datesArray.push(currentDate);
   }
 
-  const { addDate, addTime } = useContext(OrderContext);
+  const { allOrders, addDate, addTime } = useContext(OrderContext);
 
   const handleClickDate = (date) => {
     setSelectedDate(date);
     addDate(date);
-    setIsSelectedDate(true);
+    setDatesReview(
+      allOrders.filter((order) => {
+        return Date.parse(order.date) === date.getTime();
+      })
+    );
   };
 
+  console.log("outside", datesReview);
   const handleClickHour = (hour) => {
-    setSelectedHour(hour);
-    addTime(hour);
-    setIsSelectedHour(true);
+    if (datesReview.length === 0) {
+      console.log("the datesReview array is empty");
+      console.log("You are free to continue");
+      setSelectedHour(hour);
+      addTime(hour);
+    } else {
+      console.log("the datesReview array is not empty");
+      let hourReview = datesReview.filter((order) => {
+        console.log(order.time);
+        console.log(hour);
+        console.log(order.time === hour);
+        return order.time === hour;
+      });
+      console.log("hourReview => ", hourReview);
+      if (hourReview.length === 0) {
+        console.log(
+          " but the hourReview array is empty. So you are free to continue"
+        );
+        setSelectedHour(hour);
+        addTime(hour);
+      } else {
+        console.log("Sorry, this hour was already selected for other client");
+        alert("Sorry, this hour was already selected for other client");
+      }
+    }
   };
 
   return (
@@ -72,16 +99,22 @@ const Calendar = () => {
         {datesArray.map((date, index) => (
           <div
             key={index}
-            className={`day ${isSelectedDate ? "selected" : ""}`}
+            className={`day ${
+              selectedDate && selectedDate.getTime() === date.getTime()
+                ? "selected"
+                : ""
+            }`}
             onClick={() => {
               handleClickDate(date);
             }}
           >
-            {date
-              .toLocaleString("en-US", { weekday: "long" })
-              .slice(0, 3)
-              .toUpperCase()}
-            <strong>{date.getDate()}</strong>
+            <div className="weekday">
+              {date
+                .toLocaleString("en-US", { weekday: "long" })
+                .slice(0, 3)
+                .toUpperCase()}
+            </div>
+            <div>{date.getDate()}</div>
           </div>
         ))}
       </div>
@@ -89,35 +122,39 @@ const Calendar = () => {
       {/* Hours Section  */}
       <div className="hours">
         <div className="morning">
-          <div>Morning</div>
+          <strong>Morning</strong>
           <div className="morning-hours">
             {appointmentHours[0].map((hour, index) => (
-              <strong
+              <div
                 key={index}
-                className={`hour ${isSelectedHour ? "selected" : ""}`}
+                className={`hour ${
+                  selectedHour && selectedHour === hour ? "selected" : ""
+                }`}
                 onClick={() => {
                   handleClickHour(hour);
                 }}
               >
                 {hour}
-              </strong>
+              </div>
             ))}
           </div>
         </div>
 
         <div className="afternoon">
-          <div>Afternoon</div>
+          <strong>Afternoon</strong>
           <div className="afternoon-hours">
             {appointmentHours[1].map((hour, index) => (
-              <strong
+              <div
                 key={index}
-                className={`hour ${isSelectedHour ? "selected" : ""}`}
+                className={`hour ${
+                  selectedHour && selectedHour === hour ? "selected" : ""
+                }`}
                 onClick={() => {
                   handleClickHour(hour);
                 }}
               >
                 {hour}
-              </strong>
+              </div>
             ))}
           </div>
         </div>

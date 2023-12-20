@@ -6,15 +6,7 @@ const LastOrdersPage = () => {
   const { allOrders } = useContext(OrderContext);
 
   return (
-    <div
-      className="last-orders-page"
-      style={{
-        display: "flex",
-        gap: "24px",
-        paddingBottom: "190px",
-        // height: "1100px",
-      }}
-    >
+    <div className="last-orders-page">
       {allOrders.map((order, index) => (
         <Order key={index} order={order} />
       ))}

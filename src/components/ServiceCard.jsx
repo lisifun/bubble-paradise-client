@@ -5,7 +5,7 @@ const ServiceCard = ({ service }) => {
   return (
     <div className="service-card">
       <Link
-        style={{ textDecoration: "none", color: "black" }}
+        style={{ textDecoration: "none", color: "white" }}
         to={service.toLowerCase()}
       >
         {service}

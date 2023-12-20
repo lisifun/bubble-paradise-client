@@ -3,10 +3,10 @@ import { OrderContext } from "../context/order.context";
 import SizeCard from "../components/SizeCard";
 import PackageCard from "../components/PackageCard";
 
-import small from "../assets/IMG_5848.jpg";
-import medium from "../assets/IMG_5847.jpg";
-import large from "../assets/IMG_5843.jpg";
-import giant from "../assets/IMG_5846.jpg";
+import small from "../assets/IMG_5947.jpg";
+import medium from "../assets/IMG_5946.jpg";
+import large from "../assets/IMG_5945.jpg";
+import giant from "../assets/IMG_5944.jpg";
 
 import bath from "../assets/IMG_5746.jpg";
 import hair from "../assets/IMG_5745.jpg";
@@ -23,7 +23,7 @@ const dogs = [
     size: "3 to 10 kg",
     price: 20,
     details:
-      "Small dogs, weighing under 10 kg and standing around 15 inches tall, are characterized by a compact build and fine bones. Popular breeds include Chihuahua, Pomeranian, Shih Tzu, and Yorkshire Terrier. ",
+      "Small dogs, under 10 kg and around 15 inches tall, are characterized by a compact build and fine bones; popular breeds include Chihuahua, Pomeranian, Shih Tzu, and Yorkshire Terrier.",
   },
   {
     id: 1,
@@ -32,7 +32,7 @@ const dogs = [
     size: "10 to 25 kg",
     price: 40,
     details:
-      "Medium dogs typically weigh between 10 to 25 kg and stand around 15 to 25 inches tall. They have a well-proportioned build, neither compact nor overly large, with moderate bone structure. Popular breeds include Beagle, Cocker Spaniel, and Border Collie.",
+      "Medium dogs, weighing 10 to 25 kg and standing 15 to 25 inches tall, exhibit a well-proportioned build with moderate bone structure; popular breeds include Beagle, Cocker Spaniel, and Border Collie.",
   },
   {
     id: 2,
@@ -41,7 +41,7 @@ const dogs = [
     size: "25 to 45 kg",
     price: 60,
     details:
-      "Large dogs, weighing between 25 to 45 kg and standing over 25 inches tall, are characterized by a robust and sizeable build with sturdy bone structures. Breeds like Labrador Retriever, Golden Retriever, and German Shepherd fall into this category.",
+      "Large dogs, weighing 25 to 45 kg and standing over 25 inches tall, exhibit a robust build with sturdy bone structures; breeds like Labrador Retriever, Golden Retriever, and German Shepherd fall into this category.",
   },
   {
     id: 3,
@@ -50,7 +50,7 @@ const dogs = [
     size: "Over 45 kg",
     price: 80,
     details:
-      "Giant dogs, exceeding 45 kg and standing considerably tall, such as the Great Dane, Saint Bernard, and Newfoundland, boast an imposing and massive build with robust bone structures.",
+      "Giant dogs, exceeding 45 kg and standing considerably tall, like the Great Dane, Saint Bernard, and Newfoundland, possess an imposing and massive build with robust bone structures.",
   },
 ];
 
@@ -87,9 +87,7 @@ const packets = [
     image: other,
     price: 40,
     duration: 30,
-    details: `Additional services includes Teeth Cleaning, 
-    Ear Cleaning, Anal Gland Expression and 
-    Checking for Parasites. `,
+    details: `Additional services include Teeth Cleaning, Ear Cleaning, Anal Gland Expression and Checking for Parasites. `,
   },
 ];
 
@@ -115,20 +113,17 @@ const GroomingPage = () => {
           })}
         </div>
       </div>
-      <div className="nav-buttons">
-        <div>
-          <Link to="/">
-            <button className="back-button">Back</button>
-          </Link>
-        </div>
 
-        <div>
-          {newOrder.size && newOrder.packet.length !== 0 && (
-            <Link to="/grooming/calendar">
-              <button className="next-button">Next</button>
-            </Link>
-          )}
-        </div>
+      <div>
+        {newOrder.size && newOrder.packet.length !== 0 ? (
+          <Link to="/grooming/calendar">
+            <button className="continue-button">Continue</button>
+          </Link>
+        ) : (
+          <button className="continue-button" style={{ background: "#ffebe6" }}>
+            Continue
+          </button>
+        )}
       </div>
     </div>
   );

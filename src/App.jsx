@@ -10,6 +10,7 @@ import FormPage from "./pages/FormPage";
 import ConfirmationPage from "./pages/ConfirmationPage";
 import LastOrdersPage from "./pages/LastOrdersPage";
 import EditPage from "./pages/EditPage";
+import OrderDetails from "./pages/OrderDetails";
 
 function App() {
   return (
@@ -29,6 +30,10 @@ function App() {
         ></Route>
         <Route path="/last-orders" element={<LastOrdersPage />}></Route>
         <Route path="/last-orders/edit-page" element={<EditPage />}></Route>
+        <Route
+          path="/last-orders/order-details"
+          element={<OrderDetails />}
+        ></Route>
       </Routes>
       <Footer />
     </div>
