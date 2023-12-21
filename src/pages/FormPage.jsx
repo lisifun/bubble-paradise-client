@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { OrderContext } from "../context/order.context";
 import { Link } from "react-router-dom";
 
@@ -17,24 +17,22 @@ const FormPage = () => {
     setNewApoitment((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const handlePhoneInput = (e) => {
+    if (!isNaN(e.target.value) || e.target.value === "") {
+      setNewApoitment((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    }
+  };
+
+  useEffect(() => {
+    // Scroll to the top of the page when the component is mounted
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="form-page">
       <h1>Your Details!</h1>
 
       <form className="contact-form">
-        <div className="email-input">
-          <label>
-            Email<sup>*</sup>
-          </label>
-          <input
-            type="text"
-            name="email"
-            value={newApoitment.email}
-            onChange={handleTextInput}
-            required
-          ></input>
-        </div>
-
         <div className="name-input">
           <label>
             First Name<sup>*</sup>
@@ -50,7 +48,7 @@ const FormPage = () => {
 
         <div className="lastname-input">
           <label>
-            Lastname<sup>*</sup>
+            Last Name<sup>*</sup>
           </label>
           <input
             type="text"
@@ -66,9 +64,23 @@ const FormPage = () => {
             Phone Number<sup>*</sup>
           </label>
           <input
-            type="text"
+            type="tel"
             name="phone"
+            id="phone"
             value={newApoitment.phone}
+            onChange={handlePhoneInput}
+            required
+          ></input>
+        </div>
+
+        <div className="email-input">
+          <label>
+            Email<sup>*</sup>
+          </label>
+          <input
+            type="text"
+            name="email"
+            value={newApoitment.email}
             onChange={handleTextInput}
             required
           ></input>
@@ -76,8 +88,8 @@ const FormPage = () => {
 
         <div className="comment-input">
           <label>
-            Please provide any specific instructions or <br></br> preferences
-            for your pet's grooming
+            Provide any specific instructions or preferences <br></br>for your
+            pet's grooming
           </label>
           <textarea
             name="comment"
@@ -104,8 +116,8 @@ const FormPage = () => {
             </button>
           </Link>
         ) : (
-          <button className="submit-button" style={{ background: "#ffebe6" }}>
-            Submit
+          <button className="continue-button" style={{ background: "#ffebe6" }}>
+            Continue
           </button>
         )}
       </div>

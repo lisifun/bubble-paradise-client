@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { OrderContext } from "../context/order.context";
 
@@ -25,7 +25,7 @@ const ConfirmationPage = () => {
     axios
       .post(API_URL + "/orders", order)
       .then((response) => {
-        let newOrders = [...allOrders, response.data];
+        let newOrders = [response.data, ...allOrders];
         setAllOrders(newOrders);
         setNewOrder({
           size: "",
@@ -42,13 +42,25 @@ const ConfirmationPage = () => {
       });
   };
 
+  useEffect(() => {
+    // Scroll to the top of the page when the component is mounted
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="confirmation-page">
       <h1>Confirmation</h1>
       <div className="confirmation-info">
         <strong className="date-time-title">Date & Time</strong>
-        <div>{newOrder.time}</div>
-        <div>{newOrder.date.toString().slice(0, 16)}</div>
+        <div className="client-time-info">
+          <i className="fas fa-clock"></i>
+          <div>{newOrder.time}</div>
+        </div>
+
+        <div className="client-date-info">
+          <i className="fas fa-calendar"></i>
+          <div>{newOrder.date.toString().slice(0, 16)}</div>
+        </div>
 
         <hr
           style={{
@@ -61,19 +73,22 @@ const ConfirmationPage = () => {
 
         <strong className="service-size-title">Size & Services</strong>
         <div className="client-size-info">
+          <img src={paw} alt="paw" style={{ width: "18px", height: "18px" }} />
           <div>Dog Size: {newOrder.size}</div>
         </div>
         <div className="client-service-info">
+          <img src={paw} alt="paw" style={{ width: "18px", height: "18px" }} />
           <div>Services: {newOrder.packet.join(", ")}</div>
         </div>
 
-        <div>
-          <div></div>
+        <div className="client-duration-info">
+          <i class="fas fa-hourglass"></i>
           <div>
             {hours > 1 ? `${hours} hours` : `${hours} hour`} {" and "}
             {minutes > 1 ? `${minutes} minutes` : `${minutes} minute`}
           </div>
         </div>
+
         <hr
           style={{
             width: "20vw",
@@ -101,6 +116,7 @@ const ConfirmationPage = () => {
           <i className="fas fa-envelope"></i>
           <div>{newOrder.email}</div>
         </div>
+
         <hr
           style={{
             width: "20vw",
@@ -111,7 +127,6 @@ const ConfirmationPage = () => {
         ></hr>
 
         <strong className="summary-title">Summary</strong>
-
         <div className="service-info">
           <div>Services</div>
           <div>
@@ -137,7 +152,7 @@ const ConfirmationPage = () => {
           </div>
         </div>
       </div>
-      <Link to="/">
+      <Link to="/last-orders">
         <button
           className="book-now-button"
           onClick={() => {

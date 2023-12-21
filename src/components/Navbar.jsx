@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/IMG_5725.jpg";
 
-const navKeys = ["Last Orders", "Gallery", "Contact"];
+const navKeys = [
+  { name: "New Order", link: "/grooming" },
+  { name: "Last Orders", link: "/last-orders" },
+];
 const Navbar = () => {
   return (
     <div className="navbar">
@@ -19,10 +22,10 @@ const Navbar = () => {
               color: "white",
               fontSize: "1.5em",
             }}
-            to={navKey.toLowerCase().replace(" ", "-")}
+            to={navKey.link}
             key={index}
           >
-            {navKey}
+            {navKey.name}
           </Link>
         ))}
       </div>

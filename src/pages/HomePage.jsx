@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ServiceCard from "../components/ServiceCard";
-import logo from "../assets/IMG_5725.jpg";
 
-const services = ["Grooming", "Boarding", "Training", "Daycare"];
+const services = [
+  { name: "Grooming", link: "/grooming" },
+  { name: "Boarding", link: "/" },
+  { name: "Training", link: "/" },
+  { name: "Daycare", link: "/" },
+];
 
 const HomePage = () => {
+  useEffect(() => {
+    // Scroll to the top of the page when the component is mounted
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="home-page">
       <div className="home-info">

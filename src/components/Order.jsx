@@ -35,21 +35,13 @@ const Order = ({ order }) => {
   };
 
   const handleClick = () => {
-    console.log("you clicked!");
     setShowOptions(!showOptions);
   };
 
   return (
     <div className="order">
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          border: "1px solid yellow",
-        }}
-      >
-        <div className="order-info" style={{ border: "1px solid blue" }}>
+      <div className="info-elipsis">
+        <div className="order-info">
           <strong>
             {firstName} {lastName}
           </strong>
@@ -69,39 +61,50 @@ const Order = ({ order }) => {
           </div>
         </div>
 
-        <button
-          className="order-buttons"
-          onClick={() => handleClick()}
-          style={{ border: "1px solid pink" }}
-        >
-          <i className="fas fa-ellipsis-v" style={{ color: "white" }}></i>
+        <button className="elipsis-button" onClick={() => handleClick()}>
+          <i className="fas fa-ellipsis-v"></i>
         </button>
 
         {showOptions && (
-          <div className="elipsis-options">
-            <Link to="/last-orders/edit-page">
+          <div
+            style={{
+              position: "relative",
+              display: "inline-block",
+              cursor: "pointer",
+            }}
+          >
+            <div className="elipsis-options">
+              <Link to="/last-orders/edit-page">
+                <button
+                  className="edit-button"
+                  onClick={() => {
+                    setShowOptions(!showOptions);
+                    extractingOrder(id);
+                  }}
+                >
+                  <strong>Edit</strong>
+                </button>
+              </Link>
+
+              <hr
+                style={{
+                  width: "5vw",
+                  height: "1.5px",
+                  backgroundColor: "black",
+                  border: "none",
+                }}
+              ></hr>
+
               <button
-                // className="order-buttons"
-                style={{ border: "none", backgroundColor: "transparent" }}
+                className="delete-button"
                 onClick={() => {
-                  extractingOrder(id);
+                  setShowOptions(!showOptions);
+                  deleteOrder(id);
                 }}
               >
-                <strong>Edit</strong>
+                <strong>Delete</strong>
               </button>
-            </Link>
-            <hr
-              style={{ width: "60px", height: "1px", backgroundColor: "black" }}
-            ></hr>
-            <button
-              style={{ border: "none", backgroundColor: "transparent" }}
-              // className="order-buttons"
-              onClick={() => {
-                deleteOrder(id);
-              }}
-            >
-              <strong>Delete</strong>
-            </button>
+            </div>
           </div>
         )}
       </div>
@@ -109,7 +112,7 @@ const Order = ({ order }) => {
       <div className="order-options">
         <Link to="/last-orders/order-details">
           <button
-            className="order-buttons"
+            className="view-button"
             onClick={() => extractingOrder(id)}
             style={{ color: "white" }}
           >

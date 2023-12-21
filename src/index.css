@@ -40,7 +40,7 @@ sup {
 
 /* Home Page */
 .home-page {
-  background-image: url("./assets/background-img-tobby.jpeg");
+  background-image: url("./assets/background-img-tobby.WEBP");
   background-repeat: no-repeat;
   background-size: cover;
   height: 99vh;
@@ -80,7 +80,8 @@ sup {
 .form-page,
 .confirmation-page,
 .last-orders-page,
-.edit-page {
+.edit-page,
+.order-details-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -103,16 +104,18 @@ sup {
 .continue-button,
 .submit-button,
 .book-now-button,
-.update-button {
+.update-button,
+.back-button {
   width: 274px;
   height: 50px;
   border-radius: 15px;
   background-color: #ff846c;
   border: none;
   font-size: 1.2em;
-  margin-bottom: 40px;
+  margin-bottom: 80px;
   color: white;
   font-weight: bold;
+  cursor: pointer;
 }
 
 /* Size Card && Package Card */
@@ -121,11 +124,17 @@ sup {
   position: relative;
   text-align: center;
   border-radius: 5%;
+  cursor: pointer;
 }
 
-.size-card.selected,
+.size-card.selected {
+  border: 3px solid black;
+  background-color: #ff846c;
+}
+
 .package-card.selected {
   border: 3px solid black;
+  background-color: white;
 }
 
 .size-picture,
@@ -195,7 +204,7 @@ sup {
   flex-direction: column;
   align-items: center;
   width: 500px;
-  gap: 32px;
+  gap: 24px;
   margin-bottom: 100px;
 }
 
@@ -213,6 +222,7 @@ sup {
   width: 40px;
   height: 40px;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .days {
@@ -236,6 +246,7 @@ sup {
   flex: 0 0 auto;
   border: none;
   background-color: #ffebe6;
+  cursor: pointer;
 }
 
 .weekday {
@@ -277,6 +288,7 @@ sup {
   height: 50px;
   border-radius: 15px;
   background-color: #ffebe6;
+  cursor: pointer;
 }
 
 .hour.selected {
@@ -286,10 +298,17 @@ sup {
 }
 
 /* Form Page */
-.contact-form {
+.contact-form,
+.edit-form {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  align-items: center;
+  gap: 24px;
+  width: 25vw;
+  background-color: #ffebe6;
+  border-radius: 15px;
+  padding: 32px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 100px;
 }
 
@@ -305,16 +324,16 @@ sup {
 }
 
 input {
-  width: 350px;
-  height: 50px;
+  width: 20vw;
+  height: 6vh;
   border-radius: 15px;
   border: 1px solid gray;
   padding: 0px 0px 0px 16px;
 }
 
 textarea {
-  width: 350px;
-  height: 90px;
+  width: 20vw;
+  height: 10vh;
   border-radius: 15px;
   border: 1px solid gray;
   padding: 8px 8px;
@@ -330,6 +349,7 @@ textarea {
   border-radius: 15px;
   padding: 24px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 100px;
 }
 
 .date-time,
@@ -352,11 +372,14 @@ textarea {
   padding-bottom: 16px;
 }
 
+.client-time-info,
+.client-date-info,
 .client-name-info,
 .client-phone-info,
 .client-email-info,
 .client-size-info,
-.client-service-info {
+.client-service-info,
+.client-duration-info {
   display: flex;
   gap: 4px;
 }
@@ -370,36 +393,69 @@ textarea {
 
 /* Last Orders */
 .last-orders-page {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 /* Order */
 .order {
-  width: 400px;
+  width: 25vw;
+  height: 30vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: 24px;
   background-color: #ffebe6;
   border-radius: 15px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.info-elipsis {
+  display: flex;
+  justify-content: space-between;
+}
+
 .order-info {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 16vw;
 }
 
 .elipsis-options {
+  position: absolute; /* Change to absolute positioning */
+  top: 0px; /* Adjust top position as needed */
+  right: 0px; /* Adjust right position as needed */
   align-items: center;
   padding: 12px;
   display: flex;
   flex-direction: column;
   width: 5vw;
-  gap: 12px;
+  height: 3.5vw;
   background-color: #ffebe6;
   border-radius: 15px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
+  z-index: 999px;
+}
+
+.elipsis-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  height: 24px;
+}
+
+.edit-button,
+.delete-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1em;
 }
 
 .order-options {
@@ -408,23 +464,17 @@ textarea {
   align-items: flex-end;
 }
 
-.order-buttons {
+.view-button {
   background-color: #ff846c;
   border: none;
-  width: 50px;
+  width: 100px;
   height: 50px;
   border-radius: 15px;
+  cursor: pointer;
+  font-size: 1em;
 }
 
 /* Edit Page */
-
-.edit-form {
-  display: flex;
-  flex-direction: column;
-  width: 800px;
-  margin-bottom: 100px;
-  gap: 24px;
-}
 
 .full-name-input,
 .contact-input,

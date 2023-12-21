@@ -1,10 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { OrderContext } from "../context/order.context";
 import { Link } from "react-router-dom";
 import Calendar from "../components/Calendar";
 
 const CalendarPage = () => {
   const { newOrder } = useContext(OrderContext);
+
+  useEffect(() => {
+    // Scroll to the top of the page when the component is mounted
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="calendar-page">
@@ -17,10 +22,7 @@ const CalendarPage = () => {
             <button className="continue-button">Continue</button>
           </Link>
         ) : (
-          <button
-            className="continue-button"
-            style={{ background: "#ffebe6" }}
-          >
+          <button className="continue-button" style={{ background: "#ffebe6" }}>
             Continue
           </button>
         )}

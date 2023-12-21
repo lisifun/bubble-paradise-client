@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { OrderContext } from "../context/order.context";
 import SizeCard from "../components/SizeCard";
 import PackageCard from "../components/PackageCard";
@@ -93,6 +93,11 @@ const packets = [
 
 const GroomingPage = () => {
   const { newOrder } = useContext(OrderContext);
+
+  useEffect(() => {
+    // Scroll to the top of the page when the component is mounted
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="grooming-page">

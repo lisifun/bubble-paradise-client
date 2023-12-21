@@ -1,68 +1,106 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { OrderContext } from "../context/order.context";
 
-const appointmentHours = [
-  ["8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM"],
-  ["12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM"],
-];
+// const morningAppointmentHours = [
+//   "8:00 AM",
+//   "8:30 AM",
+//   "9:00 AM",
+//   "9:30 AM",
+//   "10:00 AM",
+//   "10:30 AM",
+//   "11:00 AM",
+//   "11:30 AM",
+// ];
+const morningAppointmentHours = ["8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM"];
+
+// const afternoonAppointmentHours = [
+//   "12:00 PM",
+//   "12:30 PM",
+//   "1:00 PM",
+//   "1:30 PM",
+//   "2:00 PM",
+//   "2:30 PM",
+//   "3:00 PM",
+//   "3:30 PM",
+// ];
+const afternoonAppointmentHours = ["12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM"];
 
 const Calendar = () => {
   const currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0);
+
+  const fullCurrentDay = new Date();
+
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
   const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
   const [currentDay, setCurrentDay] = useState(currentDate.getDate());
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [datesArray, setDatesArray] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(currentDate);
   const [selectedHour, setSelectedHour] = useState(null);
-  const [datesReview, setDatesReview] = useState([]);
-  // const [hourReview, setHourReview] = useState([]);
+  const [filteredHours, setFilteredHours] = useState([]);
+  const [availableHoursMorning, setAvailableHoursMorning] = useState([]);
+  const [availableHoursAfternoon, setAvailableHoursAfternoon] = useState([]);
 
   const newDate = new Date(currentYear, currentMonth, currentDay);
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-  const datesArray = [];
-  for (let day = currentDay; day < daysInMonth + 1; day++) {
-    let currentDate = new Date(currentYear, currentMonth, day);
-    datesArray.push(currentDate);
-  }
 
   const { allOrders, addDate, addTime } = useContext(OrderContext);
+
+  useEffect(() => {
+    let tempDatesArray = [];
+
+    for (let day = currentDay; day < daysInMonth + 1; day++) {
+      let dayInMonth = new Date(currentYear, currentMonth, day);
+      tempDatesArray.push(dayInMonth);
+    }
+
+    setDatesArray(tempDatesArray);
+    addDate(currentDate);
+    setFilteredHours(
+      allOrders
+        .filter((order) => Date.parse(order.date) === currentDate.getTime())
+        .map((order) => order.time)
+    );
+  }, [currentDay, currentMonth, currentYear, daysInMonth]);
 
   const handleClickDate = (date) => {
     setSelectedDate(date);
     addDate(date);
-    setDatesReview(
-      allOrders.filter((order) => {
-        return Date.parse(order.date) === date.getTime();
-      })
+    setFilteredHours(
+      allOrders
+        .filter((order) => Date.parse(order.date) === date.getTime())
+        .map((order) => order.time)
     );
   };
 
-  console.log("outside", datesReview);
-  const handleClickHour = (hour) => {
-    if (datesReview.length === 0) {
-      console.log("the datesReview array is empty");
-      console.log("You are free to continue");
-      setSelectedHour(hour);
-      addTime(hour);
+  useEffect(() => {
+    if (filteredHours.length === 0) {
+      setAvailableHoursMorning(morningAppointmentHours);
+      setAvailableHoursAfternoon(afternoonAppointmentHours);
     } else {
-      console.log("the datesReview array is not empty");
-      let hourReview = datesReview.filter((order) => {
-        console.log(order.time);
-        console.log(hour);
-        console.log(order.time === hour);
-        return order.time === hour;
-      });
-      console.log("hourReview => ", hourReview);
-      if (hourReview.length === 0) {
-        console.log(
-          " but the hourReview array is empty. So you are free to continue"
-        );
-        setSelectedHour(hour);
-        addTime(hour);
-      } else {
-        console.log("Sorry, this hour was already selected for other client");
-        alert("Sorry, this hour was already selected for other client");
-      }
+      let newAppointmentHoursMorning = morningAppointmentHours.filter(
+        (hour) => {
+          if (!filteredHours.includes(hour)) {
+            return hour;
+          }
+        }
+      );
+
+      let newAppointmentHoursAfternoon = afternoonAppointmentHours.filter(
+        (hour) => {
+          if (!filteredHours.includes(hour)) {
+            return hour;
+          }
+        }
+      );
+      setAvailableHoursMorning(newAppointmentHoursMorning);
+      setAvailableHoursAfternoon(newAppointmentHoursAfternoon);
     }
+  }, [filteredHours]);
+
+  const handleClickHour = (hour) => {
+    setSelectedHour(hour);
+    addTime(hour);
   };
 
   return (
@@ -124,7 +162,7 @@ const Calendar = () => {
         <div className="morning">
           <strong>Morning</strong>
           <div className="morning-hours">
-            {appointmentHours[0].map((hour, index) => (
+            {availableHoursMorning.map((hour, index) => (
               <div
                 key={index}
                 className={`hour ${
@@ -143,7 +181,7 @@ const Calendar = () => {
         <div className="afternoon">
           <strong>Afternoon</strong>
           <div className="afternoon-hours">
-            {appointmentHours[1].map((hour, index) => (
+            {availableHoursAfternoon.map((hour, index) => (
               <div
                 key={index}
                 className={`hour ${
