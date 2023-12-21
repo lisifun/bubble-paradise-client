@@ -5,7 +5,6 @@ import { OrderContext } from "../context/order.context";
 import { API_URL } from "../services/API_URL";
 
 import axios from "axios";
-import paw from "../assets/paw.png";
 
 const ConfirmationPage = () => {
   const { newOrder, allOrders, setAllOrders, setNewOrder } =
@@ -73,11 +72,11 @@ const ConfirmationPage = () => {
 
         <strong className="service-size-title">Size & Services</strong>
         <div className="client-size-info">
-          <img src={paw} alt="paw" style={{ width: "18px", height: "18px" }} />
+          <i class="fas fa-paw"></i>
           <div>Dog Size: {newOrder.size}</div>
         </div>
         <div className="client-service-info">
-          <img src={paw} alt="paw" style={{ width: "18px", height: "18px" }} />
+          <i class="fas fa-paw"></i>
           <div>Services: {newOrder.packet.join(", ")}</div>
         </div>
 

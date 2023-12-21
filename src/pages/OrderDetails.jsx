@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { OrderContext } from "../context/order.context";
 import { DateTime } from "luxon";
-import paw from "../assets/paw.png";
 
 const OrderDetails = () => {
   const { updatedOrder } = useContext(OrderContext);
@@ -51,11 +50,11 @@ const OrderDetails = () => {
 
         <strong className="service-size-title">Size & Services</strong>
         <div className="client-size-info">
-          <img src={paw} alt="paw" style={{ width: "18px", height: "18px" }} />
+          <i class="fas fa-paw"></i>
           <div>Dog Size: {updatedOrder.size}</div>
         </div>
         <div className="client-service-info">
-          <img src={paw} alt="paw" style={{ width: "18px", height: "18px" }} />
+          <i class="fas fa-paw"></i>
           <div>Services: {updatedOrder.packet.join(", ")}</div>
         </div>
 
@@ -130,112 +129,6 @@ const OrderDetails = () => {
           </div>
         </div>
       </div>
-
-      {/* <div
-        style={{
-          width: "20vw",
-          display: "flex",
-          flexDirection: "column",
-          gap: "12px",
-        }}
-      >
-        <hr
-          style={{
-            width: "20vw",
-            height: "1.5px",
-            backgroundColor: "black",
-            border: "none",
-          }}
-        ></hr>
-        <div style={{ display: "flex", gap: "8px" }}>
-          <i className="fas fa-user"></i>
-          <div>
-            {updatedOrder.firstName} {updatedOrder.lastName}
-          </div>
-        </div>
-        <div style={{ display: "flex", gap: "8px" }}>
-          <i className="fas fa-phone"></i>
-          <div>
-            +1({updatedOrder.phone.slice(0, 3)}){updatedOrder.phone.slice(3, 6)}
-            -{updatedOrder.phone.slice(6)}
-          </div>
-        </div>
-        <div style={{ display: "flex", gap: "8px" }}>
-          <i className="fas fa-envelope"></i>
-          <div>{updatedOrder.email}</div>
-        </div>
-
-        <hr
-          style={{
-            width: "20vw",
-            height: "1.5px",
-            backgroundColor: "black",
-            border: "none",
-          }}
-        ></hr>
-
-        <div style={{ display: "flex", gap: "8px" }}>
-          <i className="fas fa-clock"></i>
-          <div>{updatedOrder.time}</div>
-        </div>
-
-        <div style={{ display: "flex", gap: "8px" }}>
-          <i className="fas fa-calendar"></i>
-          <div>
-            {" "}
-            {DateTime.fromISO(updatedOrder.date).toLocaleString(
-              DateTime.DATE_MED_WITH_WEEKDAY
-            )}
-          </div>
-        </div>
-
-        <hr
-          style={{
-            width: "20vw",
-            height: "1.5px",
-            backgroundColor: "black",
-            border: "none",
-          }}
-        ></hr>
-
-        <div style={{ display: "flex", gap: "8px" }}>
-          <img src={paw} alt="paw" style={{ width: "18px", height: "18px" }} />
-          <div>
-            {updatedOrder.packet.join(",")} | {updatedOrder.size}
-          </div>
-        </div>
-
-        <div style={{ display: "flex", gap: "8px" }}>
-          <i className="fas fa-money-bill"></i>
-          <div>
-            $
-            {updatedOrder.packetPrice.reduce((total, price) => {
-              return total + price;
-            }) + updatedOrder.sizePrice}
-          </div>
-        </div>
-        <hr
-          style={{
-            width: "20vw",
-            height: "1.5px",
-            backgroundColor: "black",
-            border: "none",
-          }}
-        ></hr>
-
-        <div style={{ display: "flex", gap: "8px" }}>
-          <i className="fas fa-comment"></i>
-          {updatedOrder.comment ? updatedOrder.comment : "There is no comment"}
-        </div>
-        <hr
-          style={{
-            width: "20vw",
-            height: "1.5px",
-            backgroundColor: "black",
-            border: "none",
-          }}
-        ></hr>
-      </div> */}
     </div>
   );
 };
